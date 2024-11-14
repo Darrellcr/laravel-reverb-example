@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    image: laravel-app
+    container_name: laravel-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9000:9000"  # Expose port for PHP-FPM (not directly accessible from XAMPP)
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge
